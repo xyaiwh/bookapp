@@ -15,7 +15,10 @@
       {{bookDesc.description}}
     </div>
     <div class="intro">正文</div>
-    <chapter-list :chapterList="chapterList" />
+    <chapter-list :chapterList="this.bookDesc.chapterList" />
+    <div class="footer">
+1111
+    </div>
   </div>
 </template>
 
@@ -27,7 +30,7 @@ import { getData } from "../../services/request.js";
 import Header from "../components/header";
 import bookDesc from "../components/bookDesc";
 import chapterList from '../components/chapterList'
-import func from '../../vue-temp/vue-editor-bridge.js';
+// import func from '../../vue-temp/vue-editor-bridge.js';
 
 export default {
   name: "Home",
@@ -40,26 +43,17 @@ export default {
   data() {
     return {
       bookDesc: {},
-      chapterList:[
-        {id:1,title:'第一章 蟒雀吞龙'},
-        {id:2,title:'第二章  源纹'},
-        {id:3,title:'第三章  苏幼微'},
-        {id:4,title:'第四章 源纹的力量'},
-        {id:5,title:'第五章   齐岳，柳溪'},
-        {id:6,title:'第六章  祖地宗祠'},
-        {id:7,title:'第七章 神秘之地'},
-        {id:8,title:'第八章 寻八脉'}
-      ]
     };
   },
-  async created() {
-    // console.log(11111,getData);
-    
-  },
+  
   async mounted() {
     let data=await getData({url:indexUrl});
     this.bookDesc=data.data.data[0];
-    console.log(this.bookDesc,registerUrl);
+    console.log(registerUrl);
+    console.log(Array.isArray(this.bookDesc.chapterList)); 
+    this.bookDesc.chapterList.sort((a,b)=>{
+      return a.pageId-b.pageId
+    });
     // let arr=data.data.data[0].chapterList;
     /* arr.forEach(item => {
       console.log(item);
@@ -102,6 +96,16 @@ export default {
     font-size: 14px;
     color: #999;
     text-align: left;
+  }
+  .footer{
+    height: 30px;
+    background: #ECF0F0;
+    padding: 3px 0 0;
+    border-top: 1px solid #f1f1f1;
+    line-height: 26px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 120px;
   }
 }
 </style>
