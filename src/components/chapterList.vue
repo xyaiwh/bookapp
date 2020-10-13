@@ -1,7 +1,7 @@
 <template>
   <div class="chapterList">
     <ul>
-      <li v-for="(item, index) in currentChapter" :key="index">
+      <li v-for="(item, index) in currentChapter" :key="index" @click="gotoChapter(item.pageId)">
         {{ item.title }}
       </li>
     </ul>
@@ -64,7 +64,10 @@ export default {
       );
     },
     prePage() {
-      this.pageSelectId++;
+      if(this.pageSelectId == 1){
+        return ;
+      }
+      this.pageSelectId--;
       this.currentChapter = this.chapterList.slice(
         (this.pageSelectId - 1) * 20,
         this.pageSelectId * 20
@@ -73,12 +76,20 @@ export default {
     },
     nextPage() {
       // console.log(1111);
+      console.log(Math.ceil(1/20));
+     if(this.pageSelectId==Math.ceil(this.pageLenth/20)){
+       return;
+     }
       this.pageSelectId++;
       this.currentChapter = this.chapterList.slice(
         (this.pageSelectId - 1) * 20,
         this.pageSelectId * 20
       );
       // let selectO=document.querySelectorAll('select')
+    },
+    gotoChapter(pageId){
+      this.$router.push({name:'bookChapter',params:{pageId:pageId}});
+      // console.log(pageId);
     }
   }
 };

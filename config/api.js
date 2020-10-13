@@ -1,7 +1,8 @@
-const baseUrl='http://127.0.0.1:3000/',
+const baseUrl='http://31305x9171.picp.vip/',
       indexUrl=baseUrl+'index',
+      chapterUrl=baseUrl+'chapter',
       registerUrl=baseUrl+'users/register';
 
 export{
-    indexUrl,registerUrl
+    indexUrl,registerUrl,chapterUrl
 }

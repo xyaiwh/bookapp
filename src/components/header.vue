@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="header-l">
+    <div class="header-l" @click="goBack">
       {{ headerL }}
     </div>
     <h1>{{ headerTitle }}</h1>
@@ -26,7 +26,14 @@ export default {
   },
   data() {
     return {};
-  }
+  },
+  methods: {
+    goBack(){
+      // console.log(1111);
+      this.$router.go(-1);
+      // window.location.reload();
+    }
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -36,7 +43,7 @@ export default {
   h1 {
     display: flex;
     flex: 1;
-    font-size: 18px;
+    font-size: 16px;
     padding: 15px 0;
     justify-content: center;
     align-items: center;

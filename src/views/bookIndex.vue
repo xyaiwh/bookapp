@@ -49,7 +49,10 @@ export default {
   async mounted() {
     let data=await getData({url:indexUrl});
     this.bookDesc=data.data.data[0];
-    console.log(registerUrl);
+    // this.$route.meta.title = '要修改的内容'
+    let viewport=document.querySelectorAll('meta')[2];
+    viewport.content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0';
+    console.log(registerUrl,viewport);
     console.log(Array.isArray(this.bookDesc.chapterList)); 
     this.bookDesc.chapterList.sort((a,b)=>{
       return a.pageId-b.pageId
